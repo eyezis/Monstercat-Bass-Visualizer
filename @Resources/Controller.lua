@@ -6,7 +6,6 @@ function Initialize()
 	if iBarCount <= 0 then iBarCount = 200 end
 
 	oMs = {}
-	oMtSource = {}
 	for i=1,inLen do
 		oMs[i] = SKIN:GetMeasure("MsBand" .. i)
 	end
