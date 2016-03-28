@@ -17,7 +17,7 @@ function Initialize()
 		dataOut[i] = 0
 	end
 
-	ROI = 12 -- TODO: Make this configurable
+	ROI = 10 -- TODO: Make this configurable
 	avgWeight = 1/(ROI*2 + 1)
 end
 
