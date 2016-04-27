@@ -7,9 +7,10 @@ FFTOverlap=10648
 FFTAttack=64
 FFTDecay=32
 FreqMin=30
-FreqMax=130
-Sensitivity=20
+FreqMax=135
+Sensitivity=23
 Bands=26
+RMSGain=1.5
 [MsBand1]
 Measure=Plugin
 Plugin=AudioLevel
