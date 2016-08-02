@@ -1,6 +1,7 @@
 function Initialize()
 	inLen = RmGetUInt("BandCount", 25)
 	if inLen <= 0 then inLen = 25 end
+	inLen = inLen + 1
 
 	iBarCount = RmGetUInt("BarCount", 200)
 	if iBarCount <= 0 then iBarCount = 200 end
@@ -13,6 +14,7 @@ function Initialize()
 
 	dataIn = {} -- Input data
 	dataIn[inLen + 1] = 0 -- Create a zero value out of bounds to prevent errors
+	dataIn[1] = 0
 	dataOut = {} -- Output data
 	for i=1,iBarCount do
 		dataOut[i] = 0
@@ -24,8 +26,8 @@ end
 
 function Update()
 	-- Get the input data
-	for i=1,inLen do
-		dataIn[i] = oMs[i]:GetValue()
+	for i=2,inLen do
+		dataIn[i] = oMs[i-1]:GetValue()^1.1
 	end
 
 	-- Interpolate and average the new values
@@ -33,9 +35,9 @@ function Update()
 		local y = 0
 		local mapped = map(i, 1, iBarCount, 1, inLen)
 		local cur = math.floor(mapped)
-		local weight = mapped - cur
+		local weight = mapped % 1
 		
-		dataOut[i] = dataOut[i]*0.2 + interpolate(weight, dataIn[cur], dataIn[cur + 1])*0.8
+		dataOut[i] = dataOut[i]*0.1 + interpolate(weight, dataIn[cur], dataIn[cur + 1])*0.9
 	end
 
 	-- Average ROI bars forward and backward to create the smooth effect
